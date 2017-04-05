@@ -39,6 +39,5 @@ class Enemy extends Actor{
    
   void die(){
     enemies.remove(this); 
-  }
-    
+  }   
 }

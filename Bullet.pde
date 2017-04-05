@@ -1,8 +1,7 @@
 class Bullet extends Actor{
   
   Bullet(float px, float py, float vx, float vy, float ax, float ay){
-    super(px, py, vx, vy, ax, ay);
-  
+    super(px, py, vx, vy, ax, ay);  
   }
   
   void update(){
@@ -14,6 +13,5 @@ class Bullet extends Actor{
   
   void show(){
     rect(position.x, position.y, 3, 10);
-  }
-  
+  } 
 }

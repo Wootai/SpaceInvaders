@@ -43,8 +43,9 @@ class Player extends Actor{
   boolean kill(Bullet b){
     if (b != null){
       for(int i = shields.size()-1; i >= 0; i--){
+        Shield r = shields.get(i);
         if (b.position.x > shields.get(i).position.x - wid/2 && b.position.x < shields.get(i).position.x+wid/2 && b.position.y > shields.get(i).position.y){
-          shields.get(i).shrink();
+          r.shrink();
           return true;
         }
       }
