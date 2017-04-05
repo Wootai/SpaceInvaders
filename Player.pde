@@ -14,7 +14,7 @@ class Player extends Actor{
   void update(){
     super.update();
     
-    if(playerHit()){
+    if(playerHit(bullets)){
       println("hit");
       //die and reset player//
     }   
@@ -42,6 +42,12 @@ class Player extends Actor{
   
   boolean kill(Bullet b){
     if (b != null){
+      for(int i = shields.size()-1; i >= 0; i--){
+        if (b.position.x > shields.get(i).position.x - wid/2 && b.position.x < shields.get(i).position.x+wid/2 && b.position.y > shields.get(i).position.y){
+          shields.get(i).shrink();
+          return true;
+        }
+      }
       for(int i = enemies.size()-1; i >= 0; i--){
         if(PVector.dist(b.position, enemies.get(i).position) < 20){
           enemies.get(i).die();
@@ -53,13 +59,13 @@ class Player extends Actor{
         }
       }
     }
-  return false;
+    return false;
   }
 
-  boolean playerHit(){
-    for(int i = bullets.size()-1; i >= 0; i--){
-      Bullet eb = bullets.get(i);
-      if (eb.position.x > position.x && eb.position.x < position.x+wid && eb.position.y > position.y){
+  boolean playerHit(ArrayList<Bullet> b){
+    for(int i = b.size()-1; i >= 0; i--){
+      Bullet eb = b.get(i);
+      if (eb.position.x > position.x - wid/2 && eb.position.x < position.x+wid/2 && eb.position.y > position.y - high/2){
         bullets.remove(eb);
         return true;
       }

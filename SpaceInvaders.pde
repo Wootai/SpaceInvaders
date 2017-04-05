@@ -26,7 +26,7 @@ void setup(){
   
   for(int x = 0; x < 3; x++){
     for(int y = 0; y < 3; y++){
-      s = new Shield(100+(720/3)*x, height-(y*16)-60, 0,0,0,0);
+      s = new Shield(width/4*(x+1), height-(y*10)-90, 0,0,0,0);
       shields.add(s);
     }
   }
@@ -36,12 +36,13 @@ void setup(){
 
 void draw(){
   background(172);
-  
-  for(Shield s: shields){
-    s.show();
-    s.update();
+  noStroke();
+  for(int x = shields.size()-1; x >= 0; x--){
+    shields.get(x).show();
+    shields.get(x).update();
+
   }
-  
+
   if(bullets.size()>0){
     for(int x = bullets.size()-1; x >= 0; x--){
       bullets.get(x).show();
@@ -49,6 +50,7 @@ void draw(){
     }
   }
   
+  stroke(0);
   for(int x = enemies.size()-1; x >= 0; x--){
     enemies.get(x).show();
     enemies.get(x).update();
