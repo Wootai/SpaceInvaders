@@ -3,12 +3,14 @@ class Player extends Actor{
   float wid;
   float high;
   Bullet playerBull;
+  int lives;
   
   Player(float px, float py, float vx, float vy, float ax, float ay){
     super(px, py, vx, vy, ax, ay);  
     wid = 40;
     high = 20;
     playerBull = null;
+    lives = 3;
   }
   
   void update(){
@@ -16,7 +18,10 @@ class Player extends Actor{
     
     if(playerHit(bullets)){
       println("hit");
-      //die and reset player//
+      lives--;
+      if(lives == 0){
+        gameOver();
+      }
     }   
     
     if(playerBull != null){
@@ -30,7 +35,14 @@ class Player extends Actor{
   }
   
   void show(){
+    strokeWeight(1);
     fill(255);
+    textSize(12);
+    text("Health: ", width-80, 30);
+    for(int i = 0; i < lives; i++){
+      rect(width - 30, 32-6*i, 8, 4);
+    }
+    stroke(0);
     rect(position.x, position.y, wid, high);
   }
   
@@ -42,12 +54,11 @@ class Player extends Actor{
   
   boolean kill(Bullet b){
     if (b != null){
-      for(int i = shields.size()-1; i >= 0; i--){
-        Shield r = shields.get(i);
-        if (b.position.x > shields.get(i).position.x - wid/2 && b.position.x < shields.get(i).position.x+wid/2 && b.position.y > shields.get(i).position.y){
+      for(Shield r:shields){
+        if(r.impact(b)){
           r.shrink();
           return true;
-        }
+         }
       }
       for(int i = enemies.size()-1; i >= 0; i--){
         if(PVector.dist(b.position, enemies.get(i).position) < 20){
@@ -73,7 +84,6 @@ class Player extends Actor{
     } 
     return false;
   }
-
 }
 
 void keyPressed(){

@@ -12,6 +12,8 @@ class Bullet extends Actor{
   }
   
   void show(){
-    rect(position.x, position.y, 3, 10);
+    stroke(255);
+    strokeWeight(4);
+    point(position.x, position.y);
   } 
 }

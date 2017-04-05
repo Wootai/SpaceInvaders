@@ -11,6 +11,7 @@ class Shield extends Actor{
     for(int i = bullets.size()-1; i >=0; i--){
       if(impact(bullets.get(i))){
         shrink();
+        bullets.remove(bullets.get(i));
       }
     }
   }
@@ -22,7 +23,6 @@ class Shield extends Actor{
   
   boolean impact(Bullet b){
     if (b.position.x > position.x - wid/2 && b.position.x < position.x+wid/2 && b.position.y > position.y){
-      bullets.remove(b);
       return true;
     }
   return false;  
@@ -30,7 +30,6 @@ class Shield extends Actor{
   
   void shrink(){
      wid *= .9;
-     position.x+=.40;
      if (wid < 2){
        shields.remove(this);
      }

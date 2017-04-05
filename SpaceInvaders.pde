@@ -51,6 +51,8 @@ void draw(){
   }
   
   stroke(0);
+  strokeWeight(1);
+
   for(int x = enemies.size()-1; x >= 0; x--){
     enemies.get(x).show();
     enemies.get(x).update();
@@ -58,4 +60,8 @@ void draw(){
 
   p.update();
   p.show();
+}
+
+void gameOver(){
+  setup();
 }

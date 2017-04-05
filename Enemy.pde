@@ -15,15 +15,15 @@ class Enemy extends Actor{
     super.update();
     if(random(0, shootChance) < 1){
       shoot();
-    }
-    
-    //debugDead();
-    
+    }    
     if(position.x > width-size || position.x < 0+size){
       for(Enemy e: enemies){
         e.velocity.x *= -1;
         e.position.y += size/2;
-      }
+     }
+    }
+   if(position.y > p.position.y){
+      gameOver();
     }
   }
   
