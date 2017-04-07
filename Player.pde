@@ -15,9 +15,7 @@ class Player extends Actor{
   
   void update(){
     super.update();
-    
     if(playerHit(bullets)){
-      println("hit");
       lives--;
       if(lives == 0){
         gameOver();
